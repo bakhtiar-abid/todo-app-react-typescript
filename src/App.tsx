@@ -1,15 +1,13 @@
 import { type } from "@testing-library/user-event/dist/type";
 import React, { useCallback, useEffect, useReducer, useRef } from "react";
 import "./App.css";
-import Lists from "./Components/Lists";
-import { Input } from "@chakra-ui/react";
+import { Button, Paper, TextField } from '@mui/material';
+import { Box } from "@mui/system";
 
-// automatically accetps childen type
-// const Box: React.FunctionComponent<{ title: string }> = ({ children }) => {
-//    return <div>{children}</div>;
-// };
 
-// ki type er jinish thakbe in Todo App
+
+
+
 interface Todo {
    id: number;
    text: string;
@@ -72,20 +70,36 @@ function App() {
       }
    }, []);
 
-   //  [{}, {}, {}];
+   
    return (
-      <div className="App">
-         {/* <Box title="hello">
-           Hello, This is me Md. Bakhtiar Abid
-         </Box> */}
-         {/* <Lists></Lists> */}
-         <Input placeholder="Basic usage" ref={newTodoRef} />
-         <button onClick={onAddTodo}>Add</button>
+      <Box
+         className="App"
+         sx={{ bgcolor: "success.main", padding: 15, boxShadow: 3 }}
+      >
+        <h1> Hello! Make Your Day Happy, To Do List </h1>
+         <TextField
+            label="Add Your List"
+            sx={{ marginTop: 7 }}
+            inputRef={newTodoRef}
+            color="secondary"
+            focused
+         />
+         {/* <input type="text" name="" id="" ref={newTodoRef} /> */}
+
+         <Button
+            variant="outlined"
+            onClick={onAddTodo}
+            sx={{ marginTop: 8, marginLeft: 2 }}
+         >
+            Add
+         </Button>
          {todos.map((todo) => (
             <div key={todo.id}>
                {todo.text}
 
-               <button
+               <Button
+                  variant="outlined"
+                  sx={{ marginTop: 1, padding: 1, marginLeft: 1 }}
                   onClick={() =>
                      dispatch({
                         type: "REMOVE",
@@ -94,10 +108,10 @@ function App() {
                   }
                >
                   Remove
-               </button>
+               </Button>
             </div>
          ))}
-      </div>
+      </Box>
    );
 }
 
